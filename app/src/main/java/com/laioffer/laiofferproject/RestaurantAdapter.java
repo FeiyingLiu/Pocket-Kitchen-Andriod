@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,9 +16,10 @@ public class RestaurantAdapter extends BaseAdapter {
     Context context;
     List<Restaurant> restaurantData;
 
-    public RestaurantAdapter(Context context) {
+    public RestaurantAdapter(Context context, List<Restaurant> restaurantData) {
         this.context = context;
-        restaurantData = DataService.getRestaurantData();
+        this.restaurantData = restaurantData;
+
     }
 
     @Override
@@ -52,11 +54,20 @@ public class RestaurantAdapter extends BaseAdapter {
         TextView restaurantType = (TextView) convertView.findViewById(
                 R.id.restaurant_type);
 
+        ImageView restaurantThumbnail = (ImageView) convertView.findViewById(
+                R.id.restaurant_thumbnail);
+
+        ImageView restaurantRating = (ImageView) convertView.findViewById(
+                R.id.restaurant_rating);
+
+
 
         Restaurant r = restaurantData.get(position);
         restaurantName.setText(r.getName());
         restaurantAddress.setText(r.getAddress());
         restaurantType.setText(r.getType());
+        restaurantThumbnail.setImageBitmap(r.getThumbnail());
+        restaurantRating.setImageBitmap(r.getRating());
 
 
         return convertView;
